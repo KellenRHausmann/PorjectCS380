@@ -28,7 +28,7 @@ CREATE TABLE `orders` (
   `customerID` int NOT NULL,
   `totalCost` decimal(10,2) NOT NULL,
   PRIMARY KEY (`orderNumber`),
-  KEY `orderFKAccount_idx` (`customerID`),
+  KEY `orderFKaccount_idx` (`customerID`),
   CONSTRAINT `orderFKaccount` FOREIGN KEY (`customerID`) REFERENCES `accounts` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -39,7 +39,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,'2023-05-07',1,0.00);
+INSERT INTO `orders` VALUES (1,'2023-05-07',1,7.00),(2,'2023-05-17',2,2.85);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-08 13:44:46
+-- Dump completed on 2023-05-19 10:57:04

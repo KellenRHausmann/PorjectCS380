@@ -23,12 +23,12 @@ DROP TABLE IF EXISTS `accounts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `accounts` (
-  `userID` int NOT NULL,
+  `userID` int NOT NULL AUTO_INCREMENT,
   `password` varchar(45) NOT NULL,
   `username` varchar(45) NOT NULL,
   `numOrders` int NOT NULL,
   PRIMARY KEY (`userID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-INSERT INTO `accounts` VALUES (1,'password','JohnDoe',1);
+INSERT INTO `accounts` VALUES (1,'password','JohnDoe',1),(2,'drowssap','JaneDoe',1);
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-08 13:44:46
+-- Dump completed on 2023-05-19 10:57:04

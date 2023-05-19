@@ -27,13 +27,12 @@ CREATE TABLE `drinks` (
   `orderDate` date NOT NULL,
   `drinkNumber` int NOT NULL,
   `drinkType` enum('Mocha','Americano','Cappuccino','Latte','Macchiato') NOT NULL,
-  `size` enum('S','M','L') NOT NULL,
+  `size` enum('Small','Medium','Large') NOT NULL,
   `temperature` enum('Iced','Hot') NOT NULL,
   `syrup` enum('Caramel','Apple','Banana','None') NOT NULL,
   `milk` enum('Regular','Almond','Soy','Oat','None') NOT NULL,
-  `decaf` enum('Y','N') DEFAULT NULL,
-  `splitShot` enum('Y','N') DEFAULT NULL,
-  `whippedCream` enum('Y','N') DEFAULT NULL,
+  `caffeine` enum('Regular','Splitshot','Decaf') DEFAULT 'Regular',
+  `whippedCream` tinyint DEFAULT '0',
   `quantity` int NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `calories` int NOT NULL,
@@ -49,7 +48,7 @@ CREATE TABLE `drinks` (
 
 LOCK TABLES `drinks` WRITE;
 /*!40000 ALTER TABLE `drinks` DISABLE KEYS */;
-INSERT INTO `drinks` VALUES (1,'2023-05-07',1,'Mocha','L','Hot','None','Regular',NULL,NULL,NULL,1,3.75,265,NULL),(1,'2023-05-07',2,'Cappuccino','M','Iced','Banana','None',NULL,NULL,'Y',1,3.25,195,NULL),(2,'2023-05-17',1,'Macchiato','S','Hot','Caramel','Soy','Y',NULL,NULL,1,2.85,165,NULL);
+INSERT INTO `drinks` VALUES (1,'2023-05-19',1,'Mocha','Large','Hot','Caramel','Regular','Decaf',1,1,3.75,285,'null'),(1,'2023-05-19',2,'Cappuccino','Small','Iced','None','Almond','Regular',0,1,2.50,195,'Draw a leaf');
 /*!40000 ALTER TABLE `drinks` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -62,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-19 10:57:04
+-- Dump completed on 2023-05-19 14:00:28

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@lunchapp.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.helloworld.MainSceneController">
+   <children>
+      <VBox layoutX="617.0" layoutY="87.0" spacing="20.0" />
+      <HBox layoutX="14.0" layoutY="561.0" spacing="16.0">
+         <children>
+            <Button fx:id="historyButton" mnemonicParsing="false" onAction="#onPressHistoryButton" text="History" />
+         </children>
+      </HBox>
+      <Label fx:id="currentDateText" layoutX="97.0" layoutY="46.0" text="Current Date: ">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="219.0" text="User can choose drink type over here" />
+      <Label layoutX="446.0" layoutY="219.0" text="and drink additions go here" />
+      <Label layoutX="242.0" layoutY="411.0" text="Checkout button somewhere here" />
+   </children>
+</Pane>

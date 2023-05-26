@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@lunchapp.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.helloworld.MainSceneController">
+   <children>
+      <VBox layoutX="617.0" layoutY="87.0" spacing="20.0" />
+      <HBox layoutX="14.0" layoutY="561.0" spacing="16.0">
+         <children>
+            <Button fx:id="historyButton" mnemonicParsing="false" onAction="#onPressHistoryButton" text="History" />
+         </children>
+      </HBox>
+      <Label fx:id="currentDateText" layoutX="48.0" layoutY="14.0" text="Current Date: ">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="drinkChoiceBox" layoutX="97.0" layoutY="140.0" prefWidth="150.0" />
+      <CheckBox layoutX="581.0" layoutY="142.0" mnemonicParsing="false" stylesheets="@lunchapp.css" text="Milk" textFill="#00b7ff" />
+      <CheckBox layoutX="581.0" layoutY="230.0" mnemonicParsing="false" stylesheets="@lunchapp.css" text="Sugar" textFill="#00b7ff" />
+      <CheckBox layoutX="581.0" layoutY="200.0" mnemonicParsing="false" stylesheets="@lunchapp.css" text="Whipped Cream" textFill="#00b7ff" />
+      <CheckBox layoutX="581.0" layoutY="172.0" mnemonicParsing="false" stylesheets="@lunchapp.css" text="Syrup" textFill="#00b7ff" />
+      <Label layoutX="580.0" layoutY="106.0" prefHeight="22.0" prefWidth="75.0" text="Additions" />
+      <ChoiceBox fx:id="sizeChoiceBox" layoutX="97.0" layoutY="219.0" prefWidth="150.0" />
+      <ChoiceBox layoutX="97.0" layoutY="300.0" prefWidth="150.0" />
+      <ChoiceBox layoutX="97.0" layoutY="385.0" prefWidth="150.0" />
+      <Label layoutX="128.0" layoutY="110.0" text="Drink Type" />
+      <Label layoutX="136.0" layoutY="182.0" text="Size" />
+      <Label layoutX="136.0" layoutY="263.0" text="Caffeine" />
+      <Label layoutX="132.0" layoutY="347.0" text="Temperature" />
+   </children>
+</Pane>

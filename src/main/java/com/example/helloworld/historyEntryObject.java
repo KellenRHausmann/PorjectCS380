@@ -12,7 +12,8 @@ public class historyEntryObject {
     private double price;
     private int calories;
 
-    public historyEntryObject(String date, String drinkType, Double price, Integer calories) {
+    public historyEntryObject(String date, String drinkType, Double price, Integer calories)
+    {
         this.date = date;
         this.drinkType = drinkType;
         this.price = price;

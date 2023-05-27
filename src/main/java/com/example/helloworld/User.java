@@ -19,7 +19,8 @@ public class User implements Serializable {
     private String username;
     private String password;
 
-    public void addOrder(String date, coffeeDrink drink){
+    public void addOrder(String date, coffeeDrink drink)
+    {
         this.orders.put(date, drink);
     }
 

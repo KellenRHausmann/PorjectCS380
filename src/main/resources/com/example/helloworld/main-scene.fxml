@@ -15,6 +15,8 @@
       <HBox layoutX="14.0" layoutY="561.0" spacing="16.0">
          <children>
             <Button fx:id="historyButton" mnemonicParsing="false" onAction="#onPressHistoryButton" text="History" />
+            <Button fx:id="signinButton" mnemonicParsing="false" onAction="#onSignIn" text="Sign In" />
+            <Button fx:id="signupButton" mnemonicParsing="false" onAction="#onSignUp" text="Sign Up" />
          </children>
       </HBox>
       <Label fx:id="currentDateText" layoutX="48.0" layoutY="14.0" text="Current Date: ">
@@ -35,5 +37,6 @@
       <Label layoutX="136.0" layoutY="182.0" text="Size" />
       <Label layoutX="136.0" layoutY="263.0" text="Caffeine" />
       <Label layoutX="132.0" layoutY="347.0" text="Temperature" />
+      <Button layoutX="323.0" layoutY="446.0" mnemonicParsing="false" text="Add Drink To Order" />
    </children>
 </Pane>

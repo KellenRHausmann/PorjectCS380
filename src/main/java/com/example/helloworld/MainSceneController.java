@@ -19,6 +19,10 @@ public class MainSceneController {
     @FXML
     private Button historyButton;
     @FXML
+    private Button signinButton;
+    @FXML
+    private Button signupButton;
+    @FXML
     private ChoiceBox<String> drinkChoiceBox;
     @FXML
     private ChoiceBox<String> sizeChoiceBox;
@@ -54,8 +58,26 @@ public class MainSceneController {
     }
 
     @FXML
-    public void initialize()
-    {
+    protected void onSignIn(ActionEvent event) throws IOException {
+        // load new scene
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("sign-in.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+
+        stage.show();
+    }
+    @FXML
+    protected void onSignUp(ActionEvent event) throws IOException {
+        // load new scene
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("sign-up.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+
+        stage.show();
+    }
+
+    @FXML
+    public void initialize() {
 
         // display date
         displayCurrentDate();
@@ -87,8 +109,17 @@ public class MainSceneController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         String date = formatter.format(LocalDate.now());
 
+
         // add date and drink to user orders
         user.addOrder(date, mocha);
+    }
+
+    public void onOrder(ActionEvent event){
+        String drinkChoice = drinkChoiceBox.getValue();
+        String sizeChoice = sizeChoiceBox.getValue();
+        String tempChoice = tempChoiceBox.getValue();
+        String caffeineChoice = caffeineChoiceBox.getValue();
+
     }
     public MainSceneController(User user){
         this.user = user;

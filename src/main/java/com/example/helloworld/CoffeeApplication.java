@@ -25,7 +25,7 @@ public class CoffeeApplication extends Application {
         // assign alert popup on close request
         stage.setOnCloseRequest(event -> {event.consume(); createAlert(stage, loader, user);});
 
-        stage.setTitle("coffee proto");
+        stage.setTitle("Java Jive");
         stage.setResizable(false);
         stage.show();
     }

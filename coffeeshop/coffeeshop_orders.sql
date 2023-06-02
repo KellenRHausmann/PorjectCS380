@@ -23,14 +23,17 @@ DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `orders` (
-  `orderNumber` int NOT NULL,
-  `orderDate` date NOT NULL,
+  `drinkNumber` int NOT NULL AUTO_INCREMENT,
   `customerID` int NOT NULL,
-  `totalCost` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`orderNumber`),
-  KEY `orderFKaccount_idx` (`customerID`),
-  CONSTRAINT `orderFKaccount` FOREIGN KEY (`customerID`) REFERENCES `accounts` (`userID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `orderDate` varchar(45) NOT NULL,
+  `drinkType` varchar(45) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `calories` int NOT NULL,
+  `additions` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`drinkNumber`,`customerID`),
+  KEY `ordersFKaccounts_idx` (`customerID`),
+  CONSTRAINT `ordersFKaccounts` FOREIGN KEY (`customerID`) REFERENCES `accounts` (`userID`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +42,6 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,'2023-05-19',7,6.25);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-19 14:00:27
+-- Dump completed on 2023-06-02 15:19:15

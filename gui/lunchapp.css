@@ -1,0 +1,56 @@
+.label{
+    -fx-text-fill: #55c48e;
+    -fx-font-family: "Lucida Console";
+    -fx-background-radius: 0 0 0 0;
+}
+
+.root{
+    -fx-background-color:  #202a42;
+}
+
+.button{
+    -fx-background-color: #192030;
+    -fx-text-fill: #55c48e;
+    -fx-font-family: "Lucida Console";
+    -fx-background-radius: 10;
+}
+
+.button:hover{
+    -fx-background-color:  #a4ad4e;
+}
+
+.cell{
+    -fx-text-fill: #55c48e;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: #192030;
+}
+.table-row-cell:even{
+    -fx-background-color: #202a42;
+}
+
+.text-field{
+    -fx-background-color: #a7b0c4;
+}
+
+.text-area {
+    -fx-text-fill: #55c48e;
+    -fx-font-family: "Lucida Console";
+}
+
+.text-area .content{
+    -fx-background-color: #202a42;
+}
+
+.chart-plot-background{
+    -fx-background-color: #a7b0c4;
+}
+
+.table-column{
+    -fx-alignment: CENTER;
+}
+
+.table-view .column-header{
+    -fx-background-color: #192030;
+}

@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -22,6 +23,14 @@ public class MainSceneController {
     private Button signinButton;
     @FXML
     private Button signupButton;
+    @FXML
+    private CheckBox milkAddition;
+    @FXML
+    private CheckBox sugarAddition;
+    @FXML
+    private CheckBox syurpAddition;
+    @FXML
+    private CheckBox whippedCreamAddition;
     @FXML
     private ChoiceBox<String> drinkChoiceBox;
     @FXML
@@ -40,10 +49,11 @@ public class MainSceneController {
 
     @FXML
     private User user; // the user account which stores order history and balance
+    public SignInController SIC;
 
 
     @FXML
-    protected void onPressHistoryButton(ActionEvent event) throws IOException{ // When 'history' button is clicked
+    protected void onPressHistoryButton(ActionEvent event) throws IOException, SQLException { // When 'history' button is clicked
 
         // load new scene
         FXMLLoader loader = new FXMLLoader(getClass().getResource("history.fxml"));
@@ -113,8 +123,75 @@ public class MainSceneController {
         // add date and drink to user orders
         user.addOrder(date, mocha);
     }
+    public void AddOrder(ActionEvent event)
+    {
+        Database db = new Database();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        String date = formatter.format(LocalDate.now());
+        String drinkChoice = drinkChoiceBox.getValue();
+        StringBuilder str = new StringBuilder();
 
-    public void onOrder(ActionEvent event){
+        boolean milkAddon = milkAddition.isSelected();
+        boolean sugarAddon = sugarAddition.isSelected();
+        boolean whippedCreamAddon = whippedCreamAddition.isSelected();
+        boolean syurpAddon = syurpAddition.isSelected();
+
+        if(milkAddon)
+        {
+            str.append("Milk,");
+        }
+        if(sugarAddon)
+        {
+            str.append("Sugar,");
+        }
+        if(whippedCreamAddon)
+        {
+            str.append("Whipped Cream,");
+        }
+        if(syurpAddon)
+        {
+            str.append("Syrup,");
+        }
+        String additionString = str.toString();
+
+        if(drinkChoice.equals("Mocha"))
+        {
+            coffeeDrink mocha = new mocha(milkAddon, sugarAddon, whippedCreamAddon, syurpAddon);
+            double price = mocha.getPrice();
+            int calories = mocha.getCalories();
+            int userID = SIC.getLoggedInCustomerId();
+            db.addOrder(101, userID, date, drinkChoice, price, calories, additionString);
+        }
+        else if(drinkChoice.equals("Americano"))
+        {
+            coffeeDrink Americano = new americano(milkAddon, sugarAddon, whippedCreamAddon, syurpAddon);
+            double price = Americano.getPrice();
+            int calories = Americano.getCalories();
+            int userID = SIC.getLoggedInCustomerId();
+            db.addOrder(20, userID, date, drinkChoice, price, calories, additionString);
+        }
+        else if(drinkChoice.equals("Latte"))
+        {
+            coffeeDrink Latte = new latte(milkAddon, sugarAddon, whippedCreamAddon, syurpAddon);
+            double price = Latte.getPrice();
+            int calories = Latte.getCalories();
+            int userID = SIC.getLoggedInCustomerId();
+            db.addOrder(30, userID, date, drinkChoice, price, calories, additionString);
+        }
+        else if(drinkChoice.equals("Cappucino"))
+        {
+            coffeeDrink cappuccino = new cappuccino(milkAddon, sugarAddon, whippedCreamAddon, syurpAddon);
+            double price = cappuccino.getPrice();
+            int calories = cappuccino.getCalories();
+            int userID = SIC.getLoggedInCustomerId();
+            db.addOrder(40, userID, date, drinkChoice, price, calories, additionString);
+        }
+
+
+    }
+
+    public void onOrder(ActionEvent event)
+    {
         String drinkChoice = drinkChoiceBox.getValue();
         String sizeChoice = sizeChoiceBox.getValue();
         String tempChoice = tempChoiceBox.getValue();

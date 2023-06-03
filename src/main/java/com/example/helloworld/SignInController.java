@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SignInController {
-
+    private static int loggedInUserId;
     @FXML
     private Button orderButton;
     @FXML
@@ -31,6 +31,17 @@ public class SignInController {
     void onEnter(ActionEvent event) {
         String un = usernameField.getText();
         String pw = passwordField.getText();
+
+        Database db = new Database();
+        String query = "SELECT userID FROM accounts " +
+                "WHERE username = '" + un + "' AND pass = '" + pw + "'";
+        int id = db.validateUser(query);
+        if(id > 0)
+        {
+            System.out.println("Successfully signed in as " + un);
+            SignInController.setLoggedInCustomerId(id);
+        }
+        else{System.out.println("Incorrect username or password");}
     }
     @FXML
     void onOrder(ActionEvent event) throws IOException {
@@ -55,5 +66,13 @@ public class SignInController {
         stage.setScene(new Scene(loader.load()));
         stage.show();
     }
+    public static void setLoggedInCustomerId(int userId)
+    {
+        loggedInUserId = userId;
+    }
 
+    public static int getLoggedInCustomerId()
+    {
+        return loggedInUserId;
+    }
 }

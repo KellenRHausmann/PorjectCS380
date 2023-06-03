@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.*;
 import java.util.Map;
 
 public class historyController {
@@ -29,6 +30,7 @@ public class historyController {
     private Button backButton;
 
     private User user;
+    public SignInController SIC;
     @FXML
     protected void onBackButtonPressed(ActionEvent event) throws IOException {
 
@@ -57,20 +59,34 @@ public class historyController {
         caloriesCol.setCellValueFactory(new PropertyValueFactory<historyEntryObject, Integer>("calories"));
     }
 
-    protected void inject(User user){ // injects user data into table
+    protected void inject(User user) throws SQLException
+    {
+        String query = "SELECT orderDate, drinkType, price, calories FROM orders WHERE customerID = " + SIC.getLoggedInCustomerId();
 
-        this.user = user;
-        // create historyEntryObjects from hashmap entries and add to table
-        for (Map.Entry<String, coffeeDrink> entry : user.getOrders().entrySet()) {
+        String url = "jdbc:mysql://localhost:3306/projectdatabase";
+        String username = "root";
+        String password = "cs380";
 
-            String date = entry.getKey();
-            coffeeDrink drink = entry.getValue();
+        try
+        {
+            Connection con = DriverManager.getConnection(url, username, password);
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(query);
 
-            String drinkType = drink.getType();
-            Double price  = drink.getPrice();
-            Integer calories = drink.getCalories();
+            while (rs.next())
+            {
+                String date = rs.getString("orderDate");
+                String drinkType = rs.getString("drinkType");
+                double price = rs.getDouble("price");
+                int calories = rs.getInt("calories");
 
-            table.getItems().add(new historyEntryObject(date, drinkType, price, calories));
+                table.getItems().add(new historyEntryObject(date, drinkType, price, calories));
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
         }
     }
+
 }

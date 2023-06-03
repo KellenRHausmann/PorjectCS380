@@ -1,11 +1,11 @@
 package com.example.helloworld;
 
-public class cappuchino extends coffeeDrink
+public class cappuccino extends coffeeDrink
 {
     /**
      * Contructor for making a Cappuchino
      */
-    public cappuchino(boolean hasMilk, boolean hasSugar, boolean hasSyrup, boolean hasWhippedCream)
+    public cappuccino(boolean hasMilk, boolean hasSugar, boolean hasSyrup, boolean hasWhippedCream)
     {
         super(6.75, 780,hasMilk, hasSugar, hasSyrup, hasWhippedCream);
     }

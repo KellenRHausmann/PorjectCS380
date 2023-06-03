@@ -11,7 +11,7 @@ public class mocha extends coffeeDrink
     }
 
     @Override
-    public String getType() 
+    public String getType()
     {
         return "Mocha";
     }

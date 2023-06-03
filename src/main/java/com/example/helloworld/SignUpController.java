@@ -38,6 +38,13 @@ public class SignUpController {
         {
             System.out.println("Passwords don't match");
         }
+        //Registers a new user to the database.
+        else
+        {
+            Database db = new Database();
+            db.addUser(pw, un);
+            System.out.println("Successfully signed up as " + un);
+        }
     }
 
     @FXML

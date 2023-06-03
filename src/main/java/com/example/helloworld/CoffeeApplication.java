@@ -56,4 +56,13 @@ public class CoffeeApplication extends Application {
         }
 
     }
+    public void showSelectItemDialog()
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText("Please select an item.");
+
+        alert.showAndWait();
+    }
 }

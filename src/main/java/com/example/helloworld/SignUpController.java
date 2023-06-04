@@ -12,7 +12,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class SignUpController {
+public class SignUpController
+{
 
     @FXML
     private Button orderButton;
@@ -35,9 +36,13 @@ public class SignUpController {
         String un = usernameField.getText();
         String pw = passwordField.getText();
 
+
         Database db = new Database();
         String checkQuery = "SELECT userID FROM accounts WHERE username = '" + un + "'";
 
+        /**
+         * This checks if the username exists already in the database
+         */
         int existingUserId = db.validateUser(checkQuery);
         if (existingUserId > 0)
         {
@@ -45,7 +50,7 @@ public class SignUpController {
             return;
         }
 
-        // for later
+        //Checks if the passwords match
         if (!pw.equals(passwordField1.getText()))
         {
             showFailAlert("Passwords don't match");
@@ -60,6 +65,11 @@ public class SignUpController {
         }
     }
 
+    /**
+     * This loads back to the main screen
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onOrder(ActionEvent event) throws IOException {
         // load new scene
@@ -73,6 +83,11 @@ public class SignUpController {
         stage.show();
     }
 
+    /**
+     * This loads to the sign in screen
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onSignIn(ActionEvent event) throws IOException {
         // load new scene
@@ -83,6 +98,11 @@ public class SignUpController {
         stage.show();
 
     }
+
+    /**
+     * This makes it so a pop up window on a succesful sign up
+     * @param username
+     */
     private void showSuccessAlert(String username)
     {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -91,6 +111,11 @@ public class SignUpController {
         alert.setContentText("Successfully signed up as " + username);
         alert.showAndWait();
     }
+
+    /**
+     * This makes a pop up of a  failure
+     * @param failAlert
+     */
     private void showFailAlert(String failAlert)
     {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

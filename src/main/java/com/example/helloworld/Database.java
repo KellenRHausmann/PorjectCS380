@@ -5,7 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-public class Database {
+public class Database
+{
 
     public static String url = "jdbc:mysql://localhost:3306/projectdatabase";
     public static String username = "root";
@@ -30,6 +31,9 @@ public class Database {
      * @param price starts at 0.00
      * @param calories
      * @param additions
+     * @param size
+     * @param temperature
+     * @param caffeine
      */
     public void addOrder(int drinkNumber, int customerID, String orderDate, String drinkType, double price, int calories, String additions, String size, String temperature, String caffeine)
     {
@@ -39,16 +43,29 @@ public class Database {
 
     }
 
-    public void executeQuery(String query) {
-        try {
+    /**
+     * Executes a query
+     * @param query
+     */
+    public void executeQuery(String query)
+    {
+        try
+        {
             Connection con = DriverManager.getConnection(this.url, this.username, this.password);
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(query);
         }
-        catch(SQLException a) {
+        catch(SQLException a)
+        {
             System.out.println("Error! " + a);
         }
     }
+
+    /**
+     * Gets the max drink number to interate to when adding to the databse
+     * @return int returnCount
+     * @throws SQLException
+     */
     public int getMaxDrinkCount() throws SQLException
     {
         int returnCount = 0;
@@ -66,6 +83,11 @@ public class Database {
         return returnCount;
     }
 
+    /**
+     * Validates a user
+     * @param query
+     * @return an id number
+     */
     public int validateUser(String query){
         try
         {

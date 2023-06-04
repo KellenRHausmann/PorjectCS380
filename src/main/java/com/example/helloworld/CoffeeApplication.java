@@ -11,7 +11,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class CoffeeApplication extends Application {
-
+    /**
+     * Sets the start menu to the main screen
+     * @param stage
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -30,8 +34,19 @@ public class CoffeeApplication extends Application {
         stage.show();
     }
 
+    /**
+     * Main method
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {launch();}
 
+    /**
+     * Creates an alert on exit of the app
+     * @param stage
+     * @param loader
+     * @param user
+     */
     public void createAlert(Stage stage, FXMLLoader loader, User user)
     {// This method creates the alert box that appears on close request
 

@@ -28,6 +28,11 @@ public class SignInController {
     @FXML
     private TextField usernameField;
 
+    /**
+     * Signs in the user and sets the ID that you need for the databse
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onEnter(ActionEvent event) throws IOException
     {
@@ -50,6 +55,12 @@ public class SignInController {
             showFailAlert("Incorrect username or password");
         }
     }
+
+    /**
+     * Goes to the main scereen
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onOrder(ActionEvent event) throws IOException {
         // load new scene
@@ -64,6 +75,11 @@ public class SignInController {
         stage.show();
     }
 
+    /**
+     * Goes to the sign up screen
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onSignUp(ActionEvent event) throws IOException {
         // load new scene
@@ -73,6 +89,11 @@ public class SignInController {
         stage.setScene(new Scene(loader.load()));
         stage.show();
     }
+
+    /**
+     * Alerts of a succesful sign in
+     * @param username
+     */
     private void showSuccessAlert(String username)
     {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -81,6 +102,11 @@ public class SignInController {
         alert.setContentText("Successfully signed in as " + username);
         alert.showAndWait();
     }
+
+    /**
+     * Alerts of a failed sign in
+     * @param failAlert
+     */
     private void showFailAlert(String failAlert)
     {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -89,11 +115,19 @@ public class SignInController {
         alert.setContentText(failAlert);
         alert.showAndWait();
     }
+
+    /**
+     * Sets the logged in user id
+     * @param userId
+     */
     public static void setLoggedInCustomerId(int userId)
     {
         loggedInUserId = userId;
     }
-
+    /**
+     * Gets the logged in user id
+     * @return loggedInUserID
+     */
     public static int getLoggedInCustomerId()
     {
         return loggedInUserId;

@@ -26,7 +26,6 @@ public class historyController {
     private TableColumn<historyEntryObject, Double> priceCol;
     @FXML
     private TableColumn<historyEntryObject, Integer> caloriesCol;
-
     @FXML
     private TableColumn<historyEntryObject, String> additonsCol;
     @FXML
@@ -40,8 +39,15 @@ public class historyController {
 
     private User user;
     public SignInController SIC;
+
+    /**
+     *  This laods back to the main screen
+     * @param event
+     * @throws IOException
+     */
     @FXML
-    protected void onBackButtonPressed(ActionEvent event) throws IOException {
+    protected void onBackButtonPressed(ActionEvent event) throws IOException
+    {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("main-scene.fxml"));
 
@@ -54,6 +60,9 @@ public class historyController {
 
     }
 
+    /**
+     * Creates the columns for the table
+     */
     @FXML
     public void initialize() { // assigns cell factories
 
@@ -62,21 +71,26 @@ public class historyController {
 
         // drink column
         drinkCol.setCellValueFactory(new PropertyValueFactory<historyEntryObject, String>("drinkType"));
-
+        // price column
         priceCol.setCellValueFactory(new PropertyValueFactory<historyEntryObject, Double>("price"));
-
+        // calories column
         caloriesCol.setCellValueFactory(new PropertyValueFactory<historyEntryObject, Integer>("calories"));
-
+        // additons column
         additonsCol.setCellValueFactory(new PropertyValueFactory<historyEntryObject, String>("adds"));
-
+        // size column
         sizeCol.setCellValueFactory(new PropertyValueFactory<historyEntryObject, String>("size"));
-
+        // temperature column
         tempCol.setCellValueFactory(new PropertyValueFactory<historyEntryObject, String>("temp"));
-
+        // caffeine column
         caffeineCol.setCellValueFactory(new PropertyValueFactory<historyEntryObject, String>("caffeine"));
 
     }
 
+    /**
+     * This takes data from databse and puts it into the order history
+     * @param user
+     * @throws SQLException
+     */
     protected void inject(User user) throws SQLException
     {
         String query = "SELECT orderDate, drinkType, price, calories, additions, size, temp, caffeine FROM orders WHERE customerID = " + SIC.getLoggedInCustomerId();

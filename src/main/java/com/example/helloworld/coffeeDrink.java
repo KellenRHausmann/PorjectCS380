@@ -49,6 +49,10 @@ public abstract class coffeeDrink
         return totalPrice;
     }
 
+    /**
+     * Getter caloreis
+     * @return
+     */
     public int getCalories()
     {
         int totalCalories = 0;
@@ -59,15 +63,23 @@ public abstract class coffeeDrink
         return totalCalories;
     }
 
+    /**
+     * Abtract type method
+     * @return
+     */
     public abstract String getType();
 
+    /**
+     * gets Additions list
+     * @return
+     */
     public List<additions> getAdditionList()
     {
         return additionList;
     }
     /**
      * This is the toString method
-     * @return
+     * @return string
      */
     @Override
     public String toString()

@@ -51,7 +51,12 @@ public class MainSceneController {
     private User user; // the user account which stores order history and balance
     public SignInController SIC;
 
-
+    /**
+     * Goes to the history screen
+     * @param event
+     * @throws IOException
+     * @throws SQLException
+     */
     @FXML
     protected void onPressHistoryButton(ActionEvent event) throws IOException, SQLException { // When 'history' button is clicked
 
@@ -67,6 +72,11 @@ public class MainSceneController {
         stage.show();
     }
 
+    /**
+     * Goes to the sign in screen
+     * @param event
+     * @throws IOException
+     */
     @FXML
     protected void onSignIn(ActionEvent event) throws IOException {
         // load new scene
@@ -76,6 +86,11 @@ public class MainSceneController {
 
         stage.show();
     }
+    /**
+     * Goes to the sign up screen
+     * @param event
+     * @throws IOException
+     */
     @FXML
     protected void onSignUp(ActionEvent event) throws IOException {
         // load new scene
@@ -86,9 +101,12 @@ public class MainSceneController {
         stage.show();
     }
 
+    /**
+     * Intilizes everything
+     */
     @FXML
-    public void initialize() {
-
+    public void initialize()
+    {
         // display date
         displayCurrentDate();
 
@@ -103,27 +121,36 @@ public class MainSceneController {
         properties.put("Size", Enums.Size.MEDIUM);
         properties.put("Temperature", Enums.Temperature.HOT);
         properties.put("Caffeine", Enums.Caffeine.DECAF);
-
-
-
     }
+
+    /**
+     * Creates an order and pushes it to the database
+     * @param event
+     * @throws SQLException
+     */
     public void AddOrder(ActionEvent event) throws SQLException
     {
         Database db = new Database();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         StringBuilder str = new StringBuilder();
         String date = formatter.format(LocalDate.now());
-
+        /**
+         * Grabs the variables from the selected buttons
+         */
         String drinkChoice = drinkChoiceBox.getValue();
         String sizeChoice = sizeChoiceBox.getValue();
         String tempChoice = tempChoiceBox.getValue();
         String caffChoice = caffeineChoiceBox.getValue();
-
+        /**
+         * Checks if the addons have been checked
+         */
         boolean milkAddon = milkAddition.isSelected();
         boolean sugarAddon = sugarAddition.isSelected();
         boolean whippedCreamAddon = whippedCreamAddition.isSelected();
         boolean syurpAddon = syurpAddition.isSelected();
-
+        /**
+         * Checks what addons have been selected
+         */
         if(milkAddon)
         {
             str.append("Milk,");
@@ -141,9 +168,12 @@ public class MainSceneController {
             str.append("Syrup,");
         }
         String additionString = str.toString();
-
+        //Checks if the userID is greater than 0 basically makes it so that you need to sing in to order
         if(SIC.getLoggedInCustomerId() > 0)
         {
+            /**
+             * Checks drink and orders accordingly
+             */
             if(drinkChoice.equals("Mocha"))
             {
                 coffeeDrink mocha = new mocha(milkAddon, sugarAddon, whippedCreamAddon, syurpAddon);
@@ -156,6 +186,9 @@ public class MainSceneController {
                 db.addOrder(drinkCount, userID, date, drinkChoice, price, calories, additionString, sizeChoice , tempChoice, caffChoice);
                 showSuccessAlert();
             }
+            /**
+             * Checks drink and orders accordingly
+             */
             else if(drinkChoice.equals("Americano"))
             {
                 coffeeDrink Americano = new americano(milkAddon, sugarAddon, whippedCreamAddon, syurpAddon);
@@ -168,6 +201,9 @@ public class MainSceneController {
                 db.addOrder(drinkCount, userID, date, drinkChoice, price, calories, additionString, sizeChoice , tempChoice, caffChoice);
                 showSuccessAlert();
             }
+            /**
+             * Checks drink and orders accordingly
+             */
             else if(drinkChoice.equals("Latte"))
             {
                 coffeeDrink Latte = new latte(milkAddon, sugarAddon, whippedCreamAddon, syurpAddon);
@@ -180,6 +216,9 @@ public class MainSceneController {
                 db.addOrder(drinkCount, userID, date, drinkChoice, price, calories, additionString, sizeChoice , tempChoice, caffChoice);
                 showSuccessAlert();
             }
+            /**
+             * Checks drink and orders accordingly
+             */
             else if(drinkChoice.equals("Cappucino"))
             {
                 coffeeDrink cappuccino = new cappuccino(milkAddon, sugarAddon, whippedCreamAddon, syurpAddon);
@@ -200,16 +239,24 @@ public class MainSceneController {
 
 
     }
+
     public MainSceneController(User user)
     {
         this.user = user;
     }
 
+    /**
+     * Displays current date
+     */
     private void displayCurrentDate()
     {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         currentDateText.setText("Current date: " + formatter.format(LocalDate.now()));
     }
+
+    /**
+     * Shows a succes pop up
+     */
     private void showSuccessAlert()
     {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -218,6 +265,11 @@ public class MainSceneController {
         alert.setContentText("Drink ordered!");
         alert.showAndWait();
     }
+
+    /**
+     * Shows a fail pop up
+     * @param failure
+     */
     private void showFailureAlert(String failure)
     {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

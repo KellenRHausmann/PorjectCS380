@@ -26,6 +26,15 @@ public class historyController {
     private TableColumn<historyEntryObject, Double> priceCol;
     @FXML
     private TableColumn<historyEntryObject, Integer> caloriesCol;
+
+    @FXML
+    private TableColumn<historyEntryObject, String> additonsCol;
+    @FXML
+    private TableColumn<historyEntryObject, String> sizeCol;
+    @FXML
+    private TableColumn<historyEntryObject, String> tempCol;
+    @FXML
+    private TableColumn<historyEntryObject, String> caffeineCol;
     @FXML
     private Button backButton;
 
@@ -34,15 +43,15 @@ public class historyController {
     @FXML
     protected void onBackButtonPressed(ActionEvent event) throws IOException {
 
-        // load new scene
         FXMLLoader loader = new FXMLLoader(getClass().getResource("main-scene.fxml"));
 
         // inject User into scene
-        loader.setControllerFactory( c -> {return new MainSceneController(user);});
+        loader.setControllerFactory( c -> {return new MainSceneController(new User());});
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(loader.load()));
         stage.show();
+
     }
 
     @FXML
@@ -57,11 +66,20 @@ public class historyController {
         priceCol.setCellValueFactory(new PropertyValueFactory<historyEntryObject, Double>("price"));
 
         caloriesCol.setCellValueFactory(new PropertyValueFactory<historyEntryObject, Integer>("calories"));
+
+        additonsCol.setCellValueFactory(new PropertyValueFactory<historyEntryObject, String>("adds"));
+
+        sizeCol.setCellValueFactory(new PropertyValueFactory<historyEntryObject, String>("size"));
+
+        tempCol.setCellValueFactory(new PropertyValueFactory<historyEntryObject, String>("temp"));
+
+        caffeineCol.setCellValueFactory(new PropertyValueFactory<historyEntryObject, String>("caffeine"));
+
     }
 
     protected void inject(User user) throws SQLException
     {
-        String query = "SELECT orderDate, drinkType, price, calories FROM orders WHERE customerID = " + SIC.getLoggedInCustomerId();
+        String query = "SELECT orderDate, drinkType, price, calories, additions, size, temp, caffeine FROM orders WHERE customerID = " + SIC.getLoggedInCustomerId();
 
         String url = "jdbc:mysql://localhost:3306/projectdatabase";
         String username = "root";
@@ -79,8 +97,13 @@ public class historyController {
                 String drinkType = rs.getString("drinkType");
                 double price = rs.getDouble("price");
                 int calories = rs.getInt("calories");
+                String adds = rs.getString("additions");
+                String size = rs.getString("size");
+                String temp = rs.getString("temp");
+                String caffeine = rs.getString("caffeine");
 
-                table.getItems().add(new historyEntryObject(date, drinkType, price, calories));
+
+                table.getItems().add(new historyEntryObject(date, drinkType, price, calories, adds, size, temp, caffeine));
             }
         }
         catch (SQLException e)

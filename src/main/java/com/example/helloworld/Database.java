@@ -31,33 +31,12 @@ public class Database {
      * @param calories
      * @param additions
      */
-    public void addOrder(int drinkNumber, int customerID, String orderDate, String drinkType, double price, int calories, String additions)
+    public void addOrder(int drinkNumber, int customerID, String orderDate, String drinkType, double price, int calories, String additions, String size, String temperature, String caffeine)
     {
-        String query = "INSERT INTO orders " + "VALUES(" + drinkNumber + ", '" + customerID + "', '" + orderDate + "', '" + drinkType + "', " + price + ", " + calories + ", '" + additions + "')" ;
+        String query = "INSERT INTO orders " + "VALUES(" + drinkNumber + ", '" + customerID + "', '" + orderDate + "', '" +
+                drinkType + "', " + price + ", " + calories + ", '" + additions + "', '" + size + "', '" + temperature + "', '" + caffeine + "')";
         this.executeQuery(query);
 
-    }
-    /**
-     * Adds a drink to the drinks table
-     * @param orderID The number of the order
-     * @param drinkNumber for this order (Order 1 Drink 1, Order 1 Drink 2, etc...)
-     * @param drinkType Enumerated variables|
-     * @param size 							|
-     * @param caffeine  					|
-     * @param temp                          |
-     * @param milk Boolean variables(0 for no, 1 for yes)
-     * @param syrup                                     |
-     * @param whippedCream				                |
-     * @param sugar                                     |
-     * @param price	as a double with two significant digits
-     * @param calories
-     */
-    public void addDrink(int orderID, int drinkNumber, String drinkType, Enums.Size size, Enums.Caffeine caffeine, Enums.Temperature temp,  int milk, int syrup, int whippedCream, int sugar, double price, int calories)
-    {
-        String query = "INSERT INTO drinks " + "VALUES(" + orderID +  "', " + drinkNumber + ", '" + drinkType + "', '"
-                + size + "', '" + caffeine + "', '" + temp + "', '" + milk + "', '" + syrup + "', "
-                + whippedCream + ", " + sugar + ", " + price + ", " + calories + ")";
-        this.executeQuery(query);
     }
 
     public void executeQuery(String query) {
@@ -69,6 +48,22 @@ public class Database {
         catch(SQLException a) {
             System.out.println("Error! " + a);
         }
+    }
+    public int getMaxDrinkCount() throws SQLException
+    {
+        int returnCount = 0;
+        String query = "SELECT MAX(drinkNumber) FROM orders";
+        Connection con = DriverManager.getConnection(url, username, password);
+        Statement statement = con.createStatement();
+        ResultSet result = statement.executeQuery(query);
+
+        if(result.next())
+        {
+            int maxCount = result.getInt(1);
+            returnCount = maxCount + 1;
+        }
+
+        return returnCount;
     }
 
     public int validateUser(String query){

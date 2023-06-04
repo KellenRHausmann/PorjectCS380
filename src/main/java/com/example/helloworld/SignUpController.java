@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -29,21 +30,33 @@ public class SignUpController {
     private TextField usernameField;
 
     @FXML
-    void onEnter(ActionEvent event) {
+    void onEnter(ActionEvent event) throws IOException
+    {
         String un = usernameField.getText();
         String pw = passwordField.getText();
+
+        Database db = new Database();
+        String checkQuery = "SELECT userID FROM accounts WHERE username = '" + un + "'";
+
+        int existingUserId = db.validateUser(checkQuery);
+        if (existingUserId > 0)
+        {
+            showFailAlert("Username already exists");
+            return;
+        }
 
         // for later
         if (!pw.equals(passwordField1.getText()))
         {
-            System.out.println("Passwords don't match");
+            showFailAlert("Passwords don't match");
         }
         //Registers a new user to the database.
         else
         {
-            Database db = new Database();
+            db = new Database();
             db.addUser(pw, un);
-            System.out.println("Successfully signed up as " + un);
+            showSuccessAlert(un);
+            onOrder(event);
         }
     }
 
@@ -69,6 +82,22 @@ public class SignUpController {
         stage.setScene(new Scene(loader.load()));
         stage.show();
 
+    }
+    private void showSuccessAlert(String username)
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Sign Up");
+        alert.setHeaderText(null);
+        alert.setContentText("Successfully signed up as " + username);
+        alert.showAndWait();
+    }
+    private void showFailAlert(String failAlert)
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Failure");
+        alert.setHeaderText(null);
+        alert.setContentText(failAlert);
+        alert.showAndWait();
     }
 
 }

@@ -20,10 +20,10 @@
          </font>
       </Label>
       <ChoiceBox fx:id="drinkChoiceBox" layoutX="97.0" layoutY="140.0" prefWidth="150.0" />
-      <CheckBox fx:id="milkAddition" layoutX="581.0" layoutY="142.0" mnemonicParsing="false" stylesheets="@lunchapp.css" text="Milk" textFill="#00b7ff" />
-      <CheckBox fx:id="sugarAddition" layoutX="581.0" layoutY="230.0" mnemonicParsing="false" stylesheets="@lunchapp.css" text="Sugar" textFill="#00b7ff" />
-      <CheckBox fx:id="whippedCreamAddition" layoutX="581.0" layoutY="200.0" mnemonicParsing="false" stylesheets="@lunchapp.css" text="Whipped Cream" textFill="#00b7ff" />
-      <CheckBox fx:id="syurpAddition" layoutX="581.0" layoutY="172.0" mnemonicParsing="false" stylesheets="@lunchapp.css" text="Syrup" textFill="#00b7ff" />
+      <CheckBox fx:id="milkAddition" layoutX="581.0" layoutY="142.0" mnemonicParsing="false" stylesheets="@lunchapp.css" text="Milk ( $0.25, 25 cal)" textFill="#00b7ff" />
+      <CheckBox fx:id="sugarAddition" layoutX="581.0" layoutY="230.0" mnemonicParsing="false" stylesheets="@lunchapp.css" text="Sugar ( $0.50, 15 cal )" textFill="#00b7ff" />
+      <CheckBox fx:id="whippedCreamAddition" layoutX="581.0" layoutY="200.0" mnemonicParsing="false" stylesheets="@lunchapp.css" text="Whipped Cream( $0.80, 75 cal )" textFill="#00b7ff" />
+      <CheckBox fx:id="syurpAddition" layoutX="581.0" layoutY="172.0" mnemonicParsing="false" stylesheets="@lunchapp.css" text="Syrup ( $1.25, 50 cal )" textFill="#00b7ff" />
       <Label layoutX="580.0" layoutY="106.0" prefHeight="22.0" prefWidth="75.0" text="Additions" />
       <ChoiceBox fx:id="sizeChoiceBox" layoutX="97.0" layoutY="219.0" prefWidth="150.0" />
       <ChoiceBox fx:id="caffeineChoiceBox" layoutX="97.0" layoutY="300.0" prefWidth="150.0" />
@@ -33,5 +33,9 @@
       <Label layoutX="136.0" layoutY="263.0" text="Caffeine" />
       <Label layoutX="132.0" layoutY="347.0" text="Temperature" />
       <Button layoutX="323.0" layoutY="446.0" mnemonicParsing="false" onAction="#AddOrder" text="Add Drink To Order" />
+      <Label layoutX="581.0" layoutY="293.0" text="Cappuchino ($6.75, 780 cal)" />
+      <Label layoutX="581.0" layoutY="347.0" text="Mocha ($5.50, 550 cal)" />
+      <Label layoutX="581.0" layoutY="321.0" text="Latte ($4.25, 250 cal)" />
+      <Label layoutX="580.0" layoutY="371.0" text="Americano ($2.00, 100 cal)" />
    </children>
 </Pane>

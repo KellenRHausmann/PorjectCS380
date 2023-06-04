@@ -98,38 +98,26 @@ public class MainSceneController {
         tempChoiceBox.getItems().addAll(temperatures);
         caffeineChoiceBox.getItems().addAll(caffeineChoices);
 
-        // Sample Drink creation - the GUI and user input will handle this
-
         // create drink properties
         HashMap<String, Enum> properties = new HashMap<>();
         properties.put("Size", Enums.Size.MEDIUM);
         properties.put("Temperature", Enums.Temperature.HOT);
         properties.put("Caffeine", Enums.Caffeine.DECAF);
 
-        // create additions
-        ArrayList<additions> additions = new ArrayList();
-        final additions milk  = new additions(0.25, 25, "milk");
-        final additions sugar = new additions(0.50, 15, "sugar");
-        final additions syrup = new additions(1.25, 50, "syrup");
-        final additions whipCream = new additions(0.80, 75, "whipped cream");
-
-        // create the drink
-        coffeeDrink mocha = new mocha(true, false, true, true);
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        String date = formatter.format(LocalDate.now());
 
 
-        // add date and drink to user orders
-        user.addOrder(date, mocha);
     }
-    public void AddOrder(ActionEvent event)
+    public void AddOrder(ActionEvent event) throws SQLException
     {
         Database db = new Database();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        String date = formatter.format(LocalDate.now());
-        String drinkChoice = drinkChoiceBox.getValue();
         StringBuilder str = new StringBuilder();
+        String date = formatter.format(LocalDate.now());
+
+        String drinkChoice = drinkChoiceBox.getValue();
+        String sizeChoice = sizeChoiceBox.getValue();
+        String tempChoice = tempChoiceBox.getValue();
+        String caffChoice = caffeineChoiceBox.getValue();
 
         boolean milkAddon = milkAddition.isSelected();
         boolean sugarAddon = sugarAddition.isSelected();
@@ -154,56 +142,88 @@ public class MainSceneController {
         }
         String additionString = str.toString();
 
-        if(drinkChoice.equals("Mocha"))
+        if(SIC.getLoggedInCustomerId() > 0)
         {
-            coffeeDrink mocha = new mocha(milkAddon, sugarAddon, whippedCreamAddon, syurpAddon);
-            double price = mocha.getPrice();
-            int calories = mocha.getCalories();
-            int userID = SIC.getLoggedInCustomerId();
-            db.addOrder(101, userID, date, drinkChoice, price, calories, additionString);
+            if(drinkChoice.equals("Mocha"))
+            {
+                coffeeDrink mocha = new mocha(milkAddon, sugarAddon, whippedCreamAddon, syurpAddon);
+
+                double price = mocha.getPrice();
+                int calories = mocha.getCalories();
+                int userID = SIC.getLoggedInCustomerId();
+                int drinkCount = db.getMaxDrinkCount();
+
+                db.addOrder(drinkCount, userID, date, drinkChoice, price, calories, additionString, sizeChoice , tempChoice, caffChoice);
+                showSuccessAlert();
+            }
+            else if(drinkChoice.equals("Americano"))
+            {
+                coffeeDrink Americano = new americano(milkAddon, sugarAddon, whippedCreamAddon, syurpAddon);
+
+                double price = Americano.getPrice();
+                int calories = Americano.getCalories();
+                int userID = SIC.getLoggedInCustomerId();
+                int drinkCount = db.getMaxDrinkCount();
+
+                db.addOrder(drinkCount, userID, date, drinkChoice, price, calories, additionString, sizeChoice , tempChoice, caffChoice);
+                showSuccessAlert();
+            }
+            else if(drinkChoice.equals("Latte"))
+            {
+                coffeeDrink Latte = new latte(milkAddon, sugarAddon, whippedCreamAddon, syurpAddon);
+
+                double price = Latte.getPrice();
+                int calories = Latte.getCalories();
+                int userID = SIC.getLoggedInCustomerId();
+                int drinkCount = db.getMaxDrinkCount();
+
+                db.addOrder(drinkCount, userID, date, drinkChoice, price, calories, additionString, sizeChoice , tempChoice, caffChoice);
+                showSuccessAlert();
+            }
+            else if(drinkChoice.equals("Cappucino"))
+            {
+                coffeeDrink cappuccino = new cappuccino(milkAddon, sugarAddon, whippedCreamAddon, syurpAddon);
+
+                double price = cappuccino.getPrice();
+                int calories = cappuccino.getCalories();
+                int userID = SIC.getLoggedInCustomerId();
+                int drinkCount = db.getMaxDrinkCount();
+
+                db.addOrder(drinkCount, userID, date, drinkChoice, price, calories, additionString, sizeChoice , tempChoice, caffChoice);
+                showSuccessAlert();
+            }
         }
-        else if(drinkChoice.equals("Americano"))
+        else
         {
-            coffeeDrink Americano = new americano(milkAddon, sugarAddon, whippedCreamAddon, syurpAddon);
-            double price = Americano.getPrice();
-            int calories = Americano.getCalories();
-            int userID = SIC.getLoggedInCustomerId();
-            db.addOrder(20, userID, date, drinkChoice, price, calories, additionString);
-        }
-        else if(drinkChoice.equals("Latte"))
-        {
-            coffeeDrink Latte = new latte(milkAddon, sugarAddon, whippedCreamAddon, syurpAddon);
-            double price = Latte.getPrice();
-            int calories = Latte.getCalories();
-            int userID = SIC.getLoggedInCustomerId();
-            db.addOrder(30, userID, date, drinkChoice, price, calories, additionString);
-        }
-        else if(drinkChoice.equals("Cappucino"))
-        {
-            coffeeDrink cappuccino = new cappuccino(milkAddon, sugarAddon, whippedCreamAddon, syurpAddon);
-            double price = cappuccino.getPrice();
-            int calories = cappuccino.getCalories();
-            int userID = SIC.getLoggedInCustomerId();
-            db.addOrder(40, userID, date, drinkChoice, price, calories, additionString);
+            showFailureAlert("Sign in or Sign up to order");
         }
 
 
     }
-
-    public void onOrder(ActionEvent event)
+    public MainSceneController(User user)
     {
-        String drinkChoice = drinkChoiceBox.getValue();
-        String sizeChoice = sizeChoiceBox.getValue();
-        String tempChoice = tempChoiceBox.getValue();
-        String caffeineChoice = caffeineChoiceBox.getValue();
-
-    }
-    public MainSceneController(User user){
         this.user = user;
-    } // inject user
+    }
 
-    private void displayCurrentDate(){
+    private void displayCurrentDate()
+    {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         currentDateText.setText("Current date: " + formatter.format(LocalDate.now()));
+    }
+    private void showSuccessAlert()
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Order Alert");
+        alert.setHeaderText(null);
+        alert.setContentText("Drink ordered!");
+        alert.showAndWait();
+    }
+    private void showFailureAlert(String failure)
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Fail Alert");
+        alert.setHeaderText(null);
+        alert.setContentText(failure);
+        alert.showAndWait();
     }
 }

@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -28,20 +29,26 @@ public class SignInController {
     private TextField usernameField;
 
     @FXML
-    void onEnter(ActionEvent event) {
+    void onEnter(ActionEvent event) throws IOException
+    {
         String un = usernameField.getText();
         String pw = passwordField.getText();
 
         Database db = new Database();
+
         String query = "SELECT userID FROM accounts " +
                 "WHERE username = '" + un + "' AND pass = '" + pw + "'";
         int id = db.validateUser(query);
         if(id > 0)
         {
-            System.out.println("Successfully signed in as " + un);
             SignInController.setLoggedInCustomerId(id);
+            showSuccessAlert(un);
+            onOrder(event);
         }
-        else{System.out.println("Incorrect username or password");}
+        else
+        {
+            showFailAlert("Incorrect username or password");
+        }
     }
     @FXML
     void onOrder(ActionEvent event) throws IOException {
@@ -65,6 +72,22 @@ public class SignInController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(loader.load()));
         stage.show();
+    }
+    private void showSuccessAlert(String username)
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Sign In");
+        alert.setHeaderText(null);
+        alert.setContentText("Successfully signed in as " + username);
+        alert.showAndWait();
+    }
+    private void showFailAlert(String failAlert)
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Failure");
+        alert.setHeaderText(null);
+        alert.setContentText(failAlert);
+        alert.showAndWait();
     }
     public static void setLoggedInCustomerId(int userId)
     {

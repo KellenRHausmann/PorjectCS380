@@ -167,7 +167,13 @@ public class MainSceneController {
         {
             str.append("Syrup,");
         }
+
         String additionString = str.toString();
+
+        if(additionString.equals(""))
+        {
+            additionString = "None";
+        }
         //Checks if the userID is greater than 0 basically makes it so that you need to sing in to order
         if(SIC.getLoggedInCustomerId() > 0)
         {
